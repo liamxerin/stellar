@@ -10,6 +10,11 @@ const userSchema = new mongoose.Schema({
         require:true,
         unique:true,
     },
+    email: {
+        type: String,
+        require:true,
+        unique:true,
+    },
     password:{
         type:String,
         require:true,
@@ -23,7 +28,22 @@ const userSchema = new mongoose.Schema({
     profilePic:{
         type:String,
         default: "",
-    }
+    },
+        resetPasswordToken: {
+        type: String,
+        default: null
+    },
+    resetPasswordExpires: {
+        type: Date,
+        default: null
+    },
+
+    friends:[{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }] ,// List of friend IDs
+
+    sentRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], // Outgoing friend requests
+    receivedRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }] // Incoming friend requests
+
+    
 }, {timestamps: true})
 
 module.exports =  mongoose.model("User", userSchema)

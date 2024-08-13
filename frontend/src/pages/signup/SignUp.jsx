@@ -9,6 +9,7 @@ const SignUp = () => {
     
     fullName: '',
     username: '',
+    email:'',
     password: '',
     confirmPassword: '',
     gender: ''
@@ -28,16 +29,16 @@ const SignUp = () => {
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
       <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
         <h1 className="text-3xl font-semibold text-center text-gray-300">
-         <span className="text-blue-500">StellerChat</span>
+          <span className="text-blue-500">StellerChat</span>
         </h1>
         <form onSubmit={handleSubmit}>
           <div>
             <label className="label p-2">
-              <span className="text-base label-text">Username</span>
+              <span className="text-base label-text">Full Name</span>
             </label>
             <input
               type="text"
-              placeholder="Brown"
+              placeholder="Enter your name"
               className="w-full input input-bordered h-10 bg-slate-900 text-white border-black"
               value={inputs.fullName}
               onChange={(e) =>
@@ -51,11 +52,25 @@ const SignUp = () => {
             </label>
             <input
               type="text"
-              placeholder="brown223"
+              placeholder="Enter username"
               className="w-full input input-bordered h-10 bg-slate-900 text-white border-black"
               value={inputs.username}
               onChange={(e) =>
                 setInputs({ ...inputs, username: e.target.value })
+              }
+            />
+          </div>
+          <div>
+            <label className="label p-2">
+              <span className="text-base label-text">Email</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Enter email"
+              className="w-full input input-bordered h-10 bg-slate-900 text-white border-black"
+              value={inputs.email}
+              onChange={(e) =>
+                setInputs({ ...inputs, email: e.target.value })
               }
             />
           </div>
@@ -86,7 +101,10 @@ const SignUp = () => {
                 setInputs({ ...inputs, confirmPassword: e.target.value })
               }
             />
-            <GenderCheckbox onCheckboxChange={handleCheckboxChange} selectedGender={ inputs.gender} />
+            <GenderCheckbox
+              onCheckboxChange={handleCheckboxChange}
+              selectedGender={inputs.gender}
+            />
             <Link
               to="/login"
               className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block"
@@ -96,8 +114,15 @@ const SignUp = () => {
             </Link>
           </div>
           <div>
-            <button className="btn btn-block btn-sm mt-2 bg-slate-900 text-white border-black hover:bg-gray-800" disabled={loading}>
-            { loading?  <span className='loading loading-spinner'></span> : "Sign up"}
+            <button
+              className="btn btn-block btn-sm mt-2 bg-slate-900 text-white border-black hover:bg-gray-800"
+              disabled={loading}
+            >
+              {loading ? (
+                <span className="loading loading-spinner"></span>
+              ) : (
+                "Sign up"
+              )}
             </button>
           </div>
         </form>
